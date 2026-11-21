@@ -615,9 +615,11 @@ def main():
             # Si la subida dejo el post programado (programacion nativa
             # de TikTok), aqui va el ISO del slot; None = salio al momento.
             "programado_para": resultado.get("programado_para"),
-            # Reservado: snapshot de metricas a las 48 h (vistas/likes),
-            # igual que el views_48h de los canales de YouTube; se rellena
-            # cuando haya una fuente de metricas de TikTok conectada.
+            # Snapshot de metricas a las 48 h (vistas/likes/comentarios/
+            # compartidos), igual que el views_48h de los canales de
+            # YouTube: lo rellena analitica.py (TikTok-Api, solo lectura)
+            # al final de una corrida posterior, si config trae
+            # "analitica": true. Hasta entonces queda en None.
             "metricas_48h": None,
         })
         guardar_estado(est, hist)
@@ -651,9 +653,31 @@ def main():
         print("Renderizado sin subir (subida desactivada):", final)
 
 
+def _analitica_best_effort():
+    """Snapshot de metricas a las 48 h con analitica.py (TikTok-Api,
+    solo lectura). Se ejecuta al final de TODA corrida (finally): si
+    config.json trae "analitica": true, intenta rellenar metricas_48h
+    en historial.json y el paso de commit del workflow lo recoge.
+    Best-effort absoluto: cualquier fallo se registra y se sigue; nunca
+    cambia el resultado de la corrida ni bloquea el aviso de Telegram
+    de la publicacion (que ya se envio dentro de main())."""
+    try:
+        if not cfg.get("analitica"):
+            return
+        import analitica
+        n = analitica.ejecutar(cfg)
+        if n:
+            print(f"Analitica: metricas_48h rellenadas en {n} "
+                  "entrada(s) del historial")
+    except Exception as e:
+        print("Analitica best-effort: fallo sin afectar a la corrida:", e)
+
+
 if __name__ == "__main__":
     try:
         main()
     except Exception as e:
         _tg_alert(f"🚨 First Paycheck Math: la corrida fallo: {e}")
         raise
+    finally:
+        _analitica_best_effort()

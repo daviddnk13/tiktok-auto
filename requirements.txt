@@ -5,3 +5,4 @@ soundfile==0.14.0
 faster-whisper==1.2.1
 matplotlib==3.11.2
 tiktok-uploader==1.2.0
+TikTokApi==7.3.5

@@ -43,14 +43,74 @@ Diferencias clave frente a los canales de YouTube:
    **programado** con la programación nativa de TikTok para ese slot;
    si no, se publica de inmediato.
 6. Marca el tema como `publicado`, añade la entrada a `historial.json`
-   (con el campo `metricas_48h` reservado para el snapshot de métricas a
-   las 48 h, como el `views_48h` de YouTube) y avisa por Telegram. El
-   workflow commitea `historial.json` y `estrategia.json`.
+   y avisa por Telegram. El workflow commitea `historial.json` y
+   `estrategia.json`.
+7. Al final de la corrida, si `config.json` trae `"analitica": true`,
+   `analitica.py` intenta rellenar el `metricas_48h` de las entradas
+   que ya cumplieron 48 h (ver la sección siguiente). Es best-effort:
+   si falla, la corrida ni se entera.
 
 Horario (`.github/workflows/publish.yml`): **15:30 y 23:30 UTC** — mañana
 y tarde-noche en EE. UU. —, un video por corrida, dos al día. El workflow
 `model_health.yml` prueba los modelos de IA cada lunes, igual que en los
 otros repos.
+
+## Analítica a las 48 h y tendencias (solo lectura)
+
+Dos piezas de **solo lectura** basadas en
+[davidteather/TikTok-Api](https://github.com/davidteather/TikTok-Api)
+(MIT, fijado en `requirements.txt` como `TikTokApi==7.3.5`). Ninguna de
+las dos publica, comenta ni toca la cuenta: solo leen.
+
+### `analitica.py` — snapshot `metricas_48h`
+
+Igual que el `views_48h` de los canales de YouTube: cuando una entrada
+de `historial.json` cumple **48 h desde que el video salió** (su
+`programado_para` si el post quedó programado; si no, su `fecha` de
+subida) y aún no tiene `metricas_48h`, se traen los videos propios de
+la cuenta con TikTok-Api (sesión creada desde el mismo `cookies.txt`
+de la subida, parseado a dict) y se empareja cada entrada con su video:
+
+1. **Por descripción:** el caption guardado empieza por el gancho y es
+   la descripción del video en TikTok; si el inicio coincide, es ese.
+2. **Por fecha:** el video cuya `createTime` esté más cerca del
+   instante de publicación, dentro de ±36 h.
+
+Al emparejar, `metricas_48h` queda como
+`{vistas, likes, comentarios, compartidos, capturado_en}`.
+`main.py` lo invoca al final de cada corrida (en un `finally`, tras el
+aviso de Telegram) solo si `config.json` trae `"analitica": true`, y el
+paso de commit del workflow recoge el `historial.json` actualizado.
+**Best-effort por diseño:** todo va envuelto en try/except; si
+TikTok-Api falla se registra en el log y la corrida termina como si
+nada. También se puede correr a mano: `python analitica.py
+[cookies.txt]`.
+
+### `tendencias.py` — insumo para elegir temas
+
+CLI independiente (`python tendencias.py`): trae los videos en
+tendencia, se queda con los adyacentes a finanzas personales /
+presupuesto / nómina / trabajo en EE. UU. (filtro por palabras clave
+sobre descripción y hashtags) y escribe **`tendencias.json`** con
+`{generado_en, videos: [{descripcion, vistas, likes, hashtags}],
+hashtags_top: [{hashtag, menciones}]}`. Es un insumo para elegir los
+próximos temas de `estrategia.json` **a mano**: no modifica la cola ni
+lo invoca `main.py`.
+
+### Riesgos honestos de la lectura
+
+- **Bloqueo por IP de datacenter.** TikTok suele bloquear estas
+  lecturas desde IPs de datacenter, y los runners de GitHub Actions lo
+  son. En Actions la analítica puede fallar a menudo (sin afectar a la
+  publicación, que va por otra ruta); el sitio fiable para
+  `tendencias.py` — y para la analítica si se quiere puntual — es el
+  **servidor de David**, con su IP y sesión estables.
+- **Cookies que caducan.** La sesión de TikTok-Api usa las mismas
+  cookies que la subida; si vencen, la lectura falla igual que fallaría
+  la subida, y toca re-exportarlas (ver «El paso manual»).
+- **Es scraping no oficial** (la API oficial no da estas métricas sin
+  auditoría). Se usa solo en lectura, a ritmo humano (al final de cada
+  corrida, una pasada), el mismo criterio que con la subida.
 
 ## Secrets necesarios (GitHub → Settings → Secrets → Actions)
 
@@ -149,7 +209,9 @@ que produciría la IA, porque en la máquina local no hay claves de IA).
 ## Notas
 
 - `config.json` concentra lo ajustable: modelos de IA, voz y proveedor
-  TTS (`tts`), velocidad, rango de duración objetivo y el bloque
+  TTS (`tts`), velocidad, rango de duración objetivo, el flag
+  `analitica` (`true` activa el snapshot de métricas a las 48 h de
+  `analitica.py` al final de cada corrida) y el bloque
   `subida`: `subida.activada` (con `false` el pipeline renderiza sin
   subir, útil para pruebas), `subida.portada` (portada personalizada
   por video, `true` por defecto), `subida.programar` (programación
