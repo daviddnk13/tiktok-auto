@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-21T07:10:00+00:00",
+  "actualizado": "2026-11-21T19:10:30+00:00",
   "cola": [
     {
       "cta": "Follow for part 2: how to open one, step by step.",
@@ -73,7 +73,7 @@
     },
     {
       "cta": "Follow so your first card works for you, not for the bank.",
-      "estado": "pendiente",
+      "estado": "publicado",
       "gancho": "The minimum payment is designed to keep you poor",
       "id": 3,
       "titulo": "Your first credit card trap",
@@ -87,7 +87,11 @@
         "subtitulo": "Interest paid on a $1,000 balance at 24% APR",
         "tipo": "comparison_bars",
         "titulo_visual": "Two ways to pay the same card"
-      }
+      },
+      "url": null,
+      "url_pendiente": "TikTok asigna la URL al publicarse; completar tras el 2026-11-22T15:30:00Z",
+      "programado_para": "2026-11-22T15:30:00+00:00",
+      "publicado_via": "Romo desde el navegador (artefacto de Actions)"
     },
     {
       "cta": "Follow — and drop your salary in the comments, we run the match math on real numbers.",

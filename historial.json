@@ -22,5 +22,16 @@
     "estado": "error_subida",
     "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'The minimum payment is designed to keep you poor. Swipe that first credit card with a plan, not a prayer! How much do you usually pay on your balance? #persona",
     "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-21T19:10:30+00:00",
+    "tema": "Your first credit card trap",
+    "estado": "publicado",
+    "metricas_48h": null,
+    "url": null,
+    "url_pendiente": "TikTok asigna la URL al publicarse; completar tras el 2026-11-22T15:30:00Z",
+    "programado_para": "2026-11-22T15:30:00+00:00",
+    "error_actions": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'The minimum payment is designed to keep you poor. Swipe that first credit card with a plan, not a prayer! How much do you usually pay on your balance? #persona",
+    "via": "Subido por Romo desde TikTok Studio con el artefacto video-fallido de Actions; la subida directa desde Actions fue rechazada por IP de datacenter. Programado al siguiente hueco libre (22 nov 15:30 UTC) porque el hueco 23:30 UTC del 21 nov ya lo ocupaba el tema 2."
   }
 ]

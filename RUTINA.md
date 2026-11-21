@@ -45,8 +45,8 @@ vive la sesión de @firstpaycheckmath.
    Editar portada → Cargar portada con la generada; **etiqueta «Contenido
    generado por IA» ACTIVADA**; comentarios permitidos; visibilidad pública.
    **Programar al siguiente hueco (15:30 o 23:30 UTC) estrictamente posterior
-   a ahora + 20 min** (el selector de Studio muestra hora local GMT-5: 15:30
-   UTC = 10:30, 23:30 UTC = 18:30). Si la programación no está disponible,
+   a ahora + 20 min** (el selector de Studio muestra hora local GMT-4: 15:30
+   UTC = 11:30, 23:30 UTC = 19:30). Si la programación no está disponible,
    publicar al momento y decirlo en el reporte. Si TikTok pide una
    verificación de identidad o un rompecabezas que no se resuelve, detenerse
    y reportar a David.
@@ -66,6 +66,8 @@ vive la sesión de @firstpaycheckmath.
 - Una sola subida por ciclo, siempre la más antigua pendiente.
 - El video 1 (Roth IRA, publicado a mano el 2026-11-21) y el tema 1 de la cola
   (`en_produccion`) son el mismo: no volver a subirlo.
+- Las publicaciones programadas NO se pueden editar en Studio: para cambiar la hora hay que eliminar la publicación y volver a subirla.
+- Si el hueco (15:30 o 23:30 UTC) ya lo ocupa otra publicación programada, usar el siguiente hueco libre; nunca dos videos en el mismo minuto.
 - Si el horario de Actions despierta algún día, el paso 0 lo detecta (la
   entrada ya existe) y no se duplica ninguna generación.
 - Las cookies y los secrets no intervienen en esta rutina: las sesiones del
