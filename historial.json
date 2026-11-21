@@ -5,5 +5,12 @@
     "estado": "error_subida",
     "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your first real salary can feel confusing, but a simple budget makes it easy. Comment your take-home pay and I'll split it with this rule in a reply. #personal",
     "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-21T06:52:22.955849+00:00",
+    "tema": "The 50/30/20 rule on a real paycheck",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Your $2,800 paycheck, split in 60 seconds. Stop guessing where your money goes after your first job. The 50/30/20 rule keeps it simple. Comment your take-home ",
+    "metricas_48h": null
   }
 ]
