@@ -40,5 +40,12 @@
     "estado": "error_subida",
     "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your job is offering you a one hundred percent raise on five percent of your pay. Don't leave free cash on the table! Drop your salary below and let us know wh",
     "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-21T23:59:01.347768+00:00",
+    "tema": "401(k) match = free money",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Your job is offering you a one hundred percent raise on five percent of your pay. Free money left on the table is wild. Follow and drop your salary in the comm",
+    "metricas_48h": null
   }
 ]
