@@ -33,5 +33,12 @@
     "programado_para": "2026-11-22T15:30:00+00:00",
     "error_actions": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'The minimum payment is designed to keep you poor. Swipe that first credit card with a plan, not a prayer! How much do you usually pay on your balance? #persona",
     "via": "Subido por Romo desde TikTok Studio con el artefacto video-fallido de Actions; la subida directa desde Actions fue rechazada por IP de datacenter. Programado al siguiente hueco libre (22 nov 15:30 UTC) porque el hueco 23:30 UTC del 21 nov ya lo ocupaba el tema 2."
+  },
+  {
+    "fecha": "2026-11-21T21:06:16.399033+00:00",
+    "tema": "401(k) match = free money",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your job is offering you a one hundred percent raise on five percent of your pay. Don't leave free cash on the table! Drop your salary below and let us know wh",
+    "metricas_48h": null
   }
 ]
