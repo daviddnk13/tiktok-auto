@@ -15,5 +15,12 @@
     "programado_para": "2026-11-21T23:30:00+00:00",
     "error_actions": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Your $2,800 paycheck, split in 60 seconds. Stop guessing where your money goes after your first job. The 50/30/20 rule keeps it simple. Comment your take-home ",
     "via": "Subido por Romo desde TikTok Studio con el artefacto video-fallido de Actions; la subida directa desde Actions fue rechazada por IP de datacenter."
+  },
+  {
+    "fecha": "2026-11-21T18:48:26.018637+00:00",
+    "tema": "Your first credit card trap",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'The minimum payment is designed to keep you poor. Swipe that first credit card with a plan, not a prayer! How much do you usually pay on your balance? #persona",
+    "metricas_48h": null
   }
 ]
