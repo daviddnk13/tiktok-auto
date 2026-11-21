@@ -1,0 +1,22 @@
+name: Chequeo de modelos IA
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 13 * * 1"
+permissions:
+  contents: read
+jobs:
+  check_models:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Probar modelos de config.json
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: python check_models.py
