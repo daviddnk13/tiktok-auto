@@ -1,0 +1,7 @@
+# Las cookies de TikTok NUNCA se versionan: van como secret de GitHub
+# (TIKTOK_COOKIES) o como archivo local ignorado.
+cookies.txt
+__pycache__/
+work/
+*.mp4
+.DS_Store
