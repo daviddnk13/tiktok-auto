@@ -1,28 +1,38 @@
 # Rutina de publicación de TikTok — @firstpaycheckmath (First Paycheck Math)
 
-**Por qué existe esta rutina:** GitHub Actions genera cada video (corridas 15:30 y
-23:30 UTC), pero TikTok rechaza la subida desde la IP de datacenter de Actions
-(`error_subida` en el historial). El workflow guarda el video renderizado como
-artefacto `video-fallido`. Romo sube cada video desde su navegador, en el perfil
-«TikTok» (`pc7057f97d86f`), donde viven la sesión de @firstpaycheckmath y la
-sesión de GitHub de David. Probado de punta a punta el 2026-11-21 con el tema 2.
+**Por qué existe esta rutina:** dos cosas fallan fuera de nuestro control:
+(1) TikTok rechaza la subida desde la IP de datacenter de GitHub Actions
+(`error_subida` en el historial), así que el workflow guarda el video como
+artefacto `video-fallido` y lo sube Romo desde su navegador. (2) El horario
+programado de Actions (15:30 y 23:30 UTC) **nunca se ha disparado solo**
+(verificado el 2026-11-21: el workflow está activo y el cron es correcto, pero
+en el historial del repo solo existen corridas manuales). Por eso las rutinas
+de Romo también **disparan la generación** desde la sesión de GitHub de David,
+abierta en el perfil «TikTok» (`pc7057f97d86f`) del navegador, donde además
+vive la sesión de @firstpaycheckmath.
 
-## Ciclo por video (en orden)
+## Ciclo completo (en orden)
 
-1. **Detectar.** Leer `historial.json` y `estrategia.json` del repo
-   `daviddnk13/tiktok-auto` (API de GitHub). Hay trabajo solo si la última
-   entrada del historial tiene `estado: "error_subida"` y su tema sigue
-   `pendiente` en la `cola` de estrategia. Si no hay nada así, terminar en
-   silencio.
-2. **Bajar el video.** En el perfil «TikTok» del navegador: Actions del repo →
-   corrida más reciente de «Auto First Paycheck Math» → descargar el artefacto
-   `video-fallido` → descomprimir → `final_video.mp4`. Verificar con ffprobe:
-   1080×1920 y duración 55–95 s. Si la sesión de GitHub está caída, NO pedir
-   credenciales: reportar a David en el chat principal que hay que volver a
-   iniciar sesión en ese perfil.
+0. **Disparar la generación (si falta).** Leer `historial.json` del repo
+   `daviddnk13/tiktok-auto`. Si ya existe una entrada de la franja actual
+   (commit del bot o entrada nueva en las últimas ~2 h), el disparo ya ocurrió
+   (quizá GitHub despertó solo): saltar al paso 1. Si no: en el perfil
+   «TikTok» del navegador, abrir Actions → «Auto First Paycheck Math» →
+   **Run workflow** → confirmar. Después esperar a que aterrice la corrida:
+   releer `historial.json` cada ~5 min hasta que aparezca la entrada nueva
+   (máximo ~50 min). Si la sesión de GitHub está caída, NO pedir credenciales:
+   reportar a David en el chat principal y terminar.
+1. **Detectar el video a subir.** Hay trabajo si existe alguna entrada del
+   historial con `estado: "error_subida"` cuyo tema siga `pendiente` en la
+   `cola` de `estrategia.json`. Se procesa **la más antigua** (orden de la
+   cola), una sola por ciclo. Si no hay ninguna, terminar en silencio.
+2. **Bajar el video.** En el perfil «TikTok»: Actions → la corrida que produjo
+   esa entrada (emparejar corridas y entradas por orden temporal) → descargar
+   su artefacto `video-fallido` → descomprimir → `final_video.mp4`. Verificar
+   con ffprobe: 1080×1920 y duración 55–95 s.
 3. **Caption.** Reconstruir: la descripción guardada en el campo `error` de la
-   entrada del historial (viene truncada al final) se completa con el `cta` del
-   tema en estrategia; se añade la línea de cifras clave del `visual` del tema
+   entrada (viene truncada al final) se completa con el `cta` del tema en
+   estrategia; se añade la línea de cifras clave del `visual` del tema
    (p. ej. `$1,400 needs · $840 wants · $560 future you`), los hashtags del
    nicho (los del video 1: #personalfinance #budgeting #firstpaycheck
    #moneytips #paycheck #financialliteracy #moneytok #firstjob
@@ -53,10 +63,11 @@ sesión de GitHub de David. Probado de punta a punta el 2026-11-21 con el tema 2
 ## Reglas que no se rompen
 
 - Nunca subir un tema que ya figure `publicado` en estrategia.
-- Una sola subida por ciclo; si la corrida de Actions aún no terminó, esperar
-  al siguiente ciclo en vez de reintentar en caliente.
+- Una sola subida por ciclo, siempre la más antigua pendiente.
 - El video 1 (Roth IRA, publicado a mano el 2026-11-21) y el tema 1 de la cola
   (`en_produccion`) son el mismo: no volver a subirlo.
-- Las cookies y los secrets no intervienen en esta rutina: la sesión del
-  navegador es la única llave. Si la sesión de TikTok muere, David vuelve a
-  iniciar sesión en el perfil «TikTok» y la rutina sigue.
+- Si el horario de Actions despierta algún día, el paso 0 lo detecta (la
+  entrada ya existe) y no se duplica ninguna generación.
+- Las cookies y los secrets no intervienen en esta rutina: las sesiones del
+  navegador son la única llave. Si una sesión muere, David vuelve a iniciar
+  sesión en el perfil «TikTok» y la rutina sigue.
