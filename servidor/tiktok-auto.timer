@@ -1,0 +1,11 @@
+[Unit]
+Description=Horario de First Paycheck Math — 15:30 y 23:30 UTC (2 videos/dia)
+
+[Timer]
+OnCalendar=*-*-* 15:30:00 UTC
+OnCalendar=*-*-* 23:30:00 UTC
+Persistent=true
+Unit=tiktok-auto.service
+
+[Install]
+WantedBy=timers.target

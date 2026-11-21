@@ -156,12 +156,10 @@ El archivo `cookies.txt` está en `.gitignore`: **nunca** se commitea.
 
 ### Alternativa: correrlo en el servidor de David
 
-El mismo código funciona fuera de Actions: clona el repo en el servidor,
-crea un venv con `requirements.txt`, instala Playwright
-(`python -m playwright install --with-deps chromium`), deja el
-`cookies.txt` junto al repo (o exporta `TIKTOK_COOKIES_FILE` con su ruta)
-y programa `python main.py` en cron a las mismas horas. Sin cambios de
-código.
+El mismo código funciona fuera de Actions, sin cambios: hay un kit
+completo en `servidor/` (instalador, envoltorio de corrida y unidades
+systemd con timer a las mismas horas). Ver la sección «Modo servidor
+(sin GitHub Actions)» más abajo.
 
 ## Puesta en marcha (una sola vez)
 
@@ -175,6 +173,68 @@ código.
    mismas de los otros repos; solo `TIKTOK_COOKIES` es nuevo).
 4. Lanza una corrida manual (Actions → Auto First Paycheck Math → Run
    workflow) y verifica el aviso de Telegram y el video en el perfil.
+
+## Modo servidor (sin GitHub Actions)
+
+**Por qué:** la primera corrida real en Actions (2026-11-21) generó
+todo perfecto — guion, voz Kokoro, video, portada y analítica — pero
+TikTok **rechazó la subida desde la IP de datacenter de GitHub
+Actions** (tiktok-uploader reportó el video como no subido; el tema
+quedó en `error_subida`, pendiente de reintento). La salida: correr el
+mismo pipeline en el servidor de David, con su IP y su sesión estables.
+El kit vive en `servidor/`:
+
+- `instalar.sh` — instalación idempotente: clona/actualiza el repo en
+  `/opt/tiktok-auto`, crea el venv, instala dependencias y el Chromium
+  de Playwright, crea el `.env` (permisos 600) e instala las unidades
+  systemd.
+- `run.sh` — el envoltorio de cada corrida: espeja el workflow (mismas
+  variables de entorno; `TIKTOK_COOKIES` se materializa en un temporal
+  que se borra al salir; commit del bot de `historial.json` +
+  `estrategia.json` siempre, con el mismo mensaje, y push a GitHub).
+- `tiktok-auto.service` / `tiktok-auto.timer` — systemd, 15:30 y
+  23:30 UTC (`Persistent=true`: si el servidor estaba apagado a la
+  hora, la corrida sale al arrancar).
+- `env.ejemplo` — las 5 variables con comentarios de dónde sale cada
+  valor. **Nunca** lleva valores reales.
+
+**Comandos exactos en el servidor** (una sola vez):
+
+```bash
+# 1. Clona el repo en /opt con tu URL/alias SSH habitual (la misma
+#    forma con la que clonas cuba-bots en este servidor):
+cd /opt && git clone git@github.com:daviddnk13/tiktok-auto.git
+
+# 2. Instala todo (venv, Chromium, unidades systemd, .env):
+sudo bash /opt/tiktok-auto/servidor/instalar.sh
+
+# 3. Rellena las 5 variables (claves nuevas de este repo, Telegram y
+#    el contenido completo de tu cookies_tiktok.txt):
+nano /opt/tiktok-auto/.env
+
+# 4. Primera corrida, a mano:
+sudo systemctl start tiktok-auto.service
+
+# 5. Mírala en vivo:
+journalctl -u tiktok-auto -f
+```
+
+El timer queda activado (`enable`) con el paso 2; compruébalo con
+`systemctl list-timers tiktok-auto.timer`.
+
+**Cómo conviven ambos modos:** Actions y el servidor hacen exactamente
+lo mismo a las mismas horas — si los dos quedan activos, **publicarían
+duplicado** (y se pisarían los commits del historial). Si el servidor
+queda como ejecutor, desactiva los crons de Actions **a mano en la web
+de GitHub**: repo → Actions → workflow «Auto First Paycheck Math» → ⋯ →
+**Disable workflow**. (La app de GitHub de Muse no puede tocar los
+workflows; es un paso tuyo de dos clics.)
+
+**Nota honesta:** la IP del servidor también es de datacenter (Oracle
+Cloud). Es estable y es la misma desde la que ya operan otros servicios
+de David, pero si TikTok también la rechazara en la subida, el
+siguiente paso es correr `servidor/run.sh` en su PC con WSL — la red
+donde vive la sesión del navegador — con el mismo `.env`.
 
 ## La cola de temas (`estrategia.json`)
 

@@ -1,0 +1,13 @@
+[Unit]
+Description=First Paycheck Math — TikTok automatico (genera y sube 1 video)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/opt/tiktok-auto
+ExecStart=/opt/tiktok-auto/servidor/run.sh
+
+[Install]
+WantedBy=multi-user.target

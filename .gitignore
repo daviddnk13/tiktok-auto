@@ -1,6 +1,10 @@
 # Las cookies de TikTok NUNCA se versionan: van como secret de GitHub
 # (TIKTOK_COOKIES) o como archivo local ignorado.
 cookies.txt
+# Modo servidor: el .env lleva las 5 variables con valores reales y el
+# venv es local de la maquina; ninguno de los dos se versiona jamas.
+.env
+venv/
 __pycache__/
 work/
 *.mp4
