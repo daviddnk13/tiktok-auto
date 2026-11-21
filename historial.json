@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "fecha": "2026-11-21T06:46:59.698392+00:00",
+    "tema": "The 50/30/20 rule on a real paycheck",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your first real salary can feel confusing, but a simple budget makes it easy. Comment your take-home pay and I'll split it with this rule in a reply. #personal",
+    "metricas_48h": null
+  }
+]
