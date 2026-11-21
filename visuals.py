@@ -374,3 +374,78 @@ def render_visual(spec, duracion, out_mp4, workdir):
         "-r", str(FPS_FRAMES), out_mp4,
     ], check=True)
     return out_mp4
+
+
+# ---------------------------------------------------------------------------
+# Portada (cover) del video
+# ---------------------------------------------------------------------------
+
+def cifra_clave(spec):
+    """La cifra protagonista del tema, calculada en codigo como todo lo
+    demas: devuelve (valor_grande, etiqueta) o (None, None) si el visual
+    no tiene una cifra clara que poner en la portada."""
+    tipo = spec.get("tipo")
+    if tipo == "growth_curve":
+        fv = fv_mensual(spec["mensual"], spec["tasa_anual"], spec["anios"])
+        return (fmt_dinero(fv),
+                f"from {fmt_dinero(spec['mensual'])}/month in {spec['anios']} years")
+    if tipo == "budget_table":
+        for fila in spec.get("filas", []):
+            if fila.get("tipo") == "total" and fila.get("celdas"):
+                return fila["celdas"][-1], fila["celdas"][0]
+        return None, None
+    if tipo == "comparison_bars":
+        barras = calcular_barras(spec)
+        if not barras:
+            return None, None
+        b = next((x for x in barras if x["color"] == LIME),
+                 max(barras, key=lambda x: x["valor"]))
+        return fmt_valor(b["valor"], b["formato"]), b["etiqueta"]
+    return None, None
+
+
+def render_cover(spec, gancho, out_jpg, usuario="@firstpaycheckmath"):
+    """Genera la portada del video: JPG 1080x1920 con la misma identidad
+    (carbon + verde lima), el gancho en grande y la cifra clave del tema.
+
+    La rejilla de perfil de TikTok recorta la portada a ~3:4 centrado, asi
+    que todo el texto vive en la banda central segura (del 12,5% al 87,5%
+    de la altura): gancho centrado en esa banda, cifra debajo y el
+    @usuario al final de la banda, nunca en los bordes que se cortan."""
+    fig = plt.figure(figsize=(W / 100, H / 100), dpi=100)
+    fig.patch.set_facecolor(BG)
+    titulo = (spec.get("titulo_visual") or "").upper()
+    if titulo:
+        fig.text(0.5, 0.845, titulo, ha="center", va="center", color=LIME,
+                 fontsize=30, fontweight="bold")
+    # Gancho: se busca el mayor tamano con el que cabe en <= 4 lineas.
+    lineas, fs = None, 48
+    for fs_try, ancho in ((74, 13), (66, 15), (58, 17), (50, 20), (44, 23)):
+        cand = textwrap.wrap(gancho or "", ancho) or [""]
+        if len(cand) <= 4:
+            lineas, fs = cand, fs_try
+            break
+    if lineas is None:
+        lineas = textwrap.wrap(gancho or "", 23)[:4]
+        fs = 44
+    dy = fs * 1.5 / 1382.4  # alto de linea en fraccion de la figura
+    y = 0.665 + (len(lineas) - 1) * dy / 2
+    for linea in lineas:
+        fig.text(0.5, y, linea, ha="center", va="center", color=WHITE,
+                 fontsize=fs, fontweight="bold")
+        y -= dy
+    valor, etiqueta = cifra_clave(spec)
+    if valor:
+        fig.add_artist(Rectangle((0.44, 0.368), 0.12, 0.006,
+                                 transform=fig.transFigure, fc=LIME,
+                                 ec="none"))
+        fig.text(0.5, 0.295, valor, ha="center", va="center", color=LIME,
+                 fontsize=86, fontweight="bold")
+        if etiqueta:
+            fig.text(0.5, 0.238, etiqueta, ha="center", va="center",
+                     color=GRAY, fontsize=25)
+    fig.text(0.5, 0.155, usuario, ha="center", va="center",
+             color=GRAY_DIM, fontsize=24)
+    fig.savefig(out_jpg, facecolor=BG)
+    plt.close(fig)
+    return out_jpg

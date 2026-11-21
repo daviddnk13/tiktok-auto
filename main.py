@@ -563,8 +563,21 @@ def main():
     subida_cfg = cfg.get("subida", {})
     if subida_cfg.get("activada"):
         import upload_tiktok
+        portada_path = None
+        if subida_cfg.get("portada", True):
+            candidata = os.path.join(WORKDIR, f"cover-{tarea.get('id')}.jpg")
+            try:
+                visuals.render_cover(tarea.get("visual", {}),
+                                     tarea.get("gancho", ""),
+                                     candidata,
+                                     cfg.get("usuario", "@firstpaycheckmath"))
+                portada_path = candidata
+                print("Portada generada:", candidata)
+            except Exception as e:
+                print("Portada no generada (se sube sin ella):", e)
         try:
-            upload_tiktok.subir(final, caption, cfg)
+            resultado = upload_tiktok.subir(final, caption, cfg,
+                                            portada=portada_path)
         except upload_tiktok.CookiesError as e:
             _tg_alert("🚨 First Paycheck Math: la sesion de TikTok no "
                       f"funciona.\n{e}")
@@ -598,15 +611,26 @@ def main():
             "duracion_seg": round(duracion, 1),
             "plataforma": "tiktok",
             "estado": "publicado",
+            "portada": bool(portada_path),
+            # Si la subida dejo el post programado (programacion nativa
+            # de TikTok), aqui va el ISO del slot; None = salio al momento.
+            "programado_para": resultado.get("programado_para"),
             # Reservado: snapshot de metricas a las 48 h (vistas/likes),
             # igual que el views_48h de los canales de YouTube; se rellena
             # cuando haya una fuente de metricas de TikTok conectada.
             "metricas_48h": None,
         })
         guardar_estado(est, hist)
-        _tg_alert(f"🎵 First Paycheck Math publico en TikTok:\n"
-                  f"{tarea.get('titulo')}\n({duracion:.0f}s) "
-                  f"https://www.tiktok.com/{cfg.get('usuario', '')}")
+        prog = resultado.get("programado_para")
+        if prog:
+            _tg_alert(f"🎵 First Paycheck Math: video subido y programado "
+                      f"en TikTok para {prog} (UTC):\n"
+                      f"{tarea.get('titulo')}\n({duracion:.0f}s) "
+                      f"https://www.tiktok.com/{cfg.get('usuario', '')}")
+        else:
+            _tg_alert(f"🎵 First Paycheck Math publico en TikTok:\n"
+                      f"{tarea.get('titulo')}\n({duracion:.0f}s) "
+                      f"https://www.tiktok.com/{cfg.get('usuario', '')}")
         print("Publicado en TikTok:", tarea.get("titulo"))
     else:
         tarea["estado"] = "renderizado"

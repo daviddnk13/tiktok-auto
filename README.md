@@ -36,8 +36,12 @@ Diferencias clave frente a los canales de YouTube:
    final con ffmpeg: visual + voz + subtítulos ASS (WrapStyle 0, grupos de
    ~3 palabras, verde lima sobre oscuro, siempre dentro del cuadro) +
    banner del gancho los primeros segundos.
-5. Sube el video a TikTok con `upload_tiktok.py` (si `subida.activada`
-   está en `true` en `config.json`) y lo publica de inmediato.
+5. Genera la portada del video (`cover-<id>.jpg`, con el gancho y la cifra
+   del tema) y lo sube a TikTok con `upload_tiktok.py` (si
+   `subida.activada` está en `true` en `config.json`): si aún falta más
+   de media hora para el slot de publicación (23:30 UTC), el post queda
+   **programado** con la programación nativa de TikTok para ese slot;
+   si no, se publica de inmediato.
 6. Marca el tema como `publicado`, añade la entrada a `historial.json`
    (con el campo `metricas_48h` reservado para el snapshot de métricas a
    las 48 h, como el `views_48h` de YouTube) y avisa por Telegram. El
@@ -145,9 +149,14 @@ que produciría la IA, porque en la máquina local no hay claves de IA).
 ## Notas
 
 - `config.json` concentra lo ajustable: modelos de IA, voz y proveedor
-  TTS (`tts`), velocidad, rango de duración objetivo y el interruptor
-  `subida.activada`. Con `subida.activada: false` el pipeline renderiza
-  sin subir (útil para pruebas).
+  TTS (`tts`), velocidad, rango de duración objetivo y el bloque
+  `subida`: `subida.activada` (con `false` el pipeline renderiza sin
+  subir, útil para pruebas), `subida.portada` (portada personalizada
+  por video, `true` por defecto), `subida.programar` (programación
+  nativa de TikTok, `true` por defecto) y `subida.hora_slot_utc` (hora
+  UTC del slot al que se programa el post cuando la corrida llega con
+  más de media hora de antelación; por defecto `23.5`, es decir,
+  23:30 UTC).
 - Los videos ya publicados no se re-renderizan: cualquier arreglo aplica
   desde la siguiente corrida, como en los canales de YouTube.
 - La pregunta para comentarios que genera la IA (`pregunta`) se añade al
