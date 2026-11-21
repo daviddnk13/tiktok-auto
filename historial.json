@@ -9,8 +9,11 @@
   {
     "fecha": "2026-11-21T06:52:22.955849+00:00",
     "tema": "The 50/30/20 rule on a real paycheck",
-    "estado": "error_subida",
-    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Your $2,800 paycheck, split in 60 seconds. Stop guessing where your money goes after your first job. The 50/30/20 rule keeps it simple. Comment your take-home ",
-    "metricas_48h": null
+    "estado": "publicado",
+    "metricas_48h": null,
+    "url": "https://www.tiktok.com/@firstpaycheckmath/video/7710517393201696014",
+    "programado_para": "2026-11-21T23:30:00+00:00",
+    "error_actions": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Your $2,800 paycheck, split in 60 seconds. Stop guessing where your money goes after your first job. The 50/30/20 rule keeps it simple. Comment your take-home ",
+    "via": "Subido por Romo desde TikTok Studio con el artefacto video-fallido de Actions; la subida directa desde Actions fue rechazada por IP de datacenter."
   }
 ]
