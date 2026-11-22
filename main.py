@@ -41,6 +41,7 @@ WORKDIR = os.environ.get("TT_WORKDIR", os.path.join(BASE, "work"))
 
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 NVIDIA_KEY = os.environ.get("NVIDIA_API_KEY", "").strip()
+GROQ_KEY = os.environ.get("GROQ_API_KEY", "").strip()
 
 
 def cargar_json(ruta, defecto):
@@ -58,6 +59,7 @@ cfg = cargar_json(os.path.join(BASE, "config.json"), {})
 _MODELOS_CFG = cfg.get("modelos") or {}
 GEMINI_MODELS = _MODELOS_CFG.get("gemini") or ["gemini-3.5-flash-lite"]
 NIM_MODELS = _MODELOS_CFG.get("nvidia_nim") or ["nvidia/nemotron-3.5-lightning-30b-a3b", "nvidia/nemotron-3-ultra-550b-a55b"]
+GROQ_MODELS = _MODELOS_CFG.get("groq") or ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"]
 
 
 def _tg_alert(texto):
@@ -145,6 +147,32 @@ def call_ai(prompt_text, nim_offset=0):
                 print("Gemini retry:", ex)
                 time.sleep(2)
 
+    if GROQ_KEY:
+        for groq_model in GROQ_MODELS:
+          for _intento_groq in range(2):
+              try:
+                  groq_payload = {
+                      "model": groq_model,
+                      "messages": [{"role": "user", "content": prompt_text}],
+                      "temperature": 0.7,
+                      "max_tokens": 4000
+                  }
+                  req = urllib.request.Request(
+                      "https://api.groq.com/openai/v1/chat/completions",
+                      data=json.dumps(groq_payload).encode(),
+                      headers={"Content-Type": "application/json", "Authorization": f"Bearer {GROQ_KEY}"},
+                  )
+                  with urllib.request.urlopen(req, timeout=90) as r:
+                      rj = json.loads(r.read().decode())
+                  _msg = rj["choices"][0]["message"]
+                  raw = _msg.get("content") or _msg.get("reasoning_content") or ""
+                  if not raw.strip():
+                      raise ValueError("respuesta vacia del modelo Groq")
+                  print("Used Groq fallback:", groq_model)
+                  return parse_json_text(raw)
+              except Exception as ge:
+                  print(f"Groq {groq_model} failed:", ge)
+
     if NVIDIA_KEY:
         _orden_nim = list(NIM_MODELS)
         if _orden_nim:
@@ -175,7 +203,7 @@ def call_ai(prompt_text, nim_offset=0):
               except Exception as ne:
                   print(f"NVIDIA NIM {nim_model} failed:", ne)
 
-    raise RuntimeError("Both Gemini and NVIDIA NIM failed")
+    raise RuntimeError("Gemini, Groq and NVIDIA NIM all failed")
 
 
 # ---------------------------------------------------------------------------
