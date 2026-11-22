@@ -56,8 +56,8 @@ cfg = cargar_json(os.path.join(BASE, "config.json"), {})
 # Modelos de IA: se leen de config.json (clave "modelos") para poder
 # actualizarlos sin tocar el codigo; si faltan, se usan estos por defecto.
 _MODELOS_CFG = cfg.get("modelos") or {}
-GEMINI_MODELS = _MODELOS_CFG.get("gemini") or ["gemini-3.5-flash-lite", "gemini-2.5-flash-lite"]
-NIM_MODELS = _MODELOS_CFG.get("nvidia_nim") or ["nvidia/nemotron-3.5-lightning-30b-a3b", "meta/llama-4-maverick-17b-128e-instruct", "z-ai/glm-5.3-flash", "nvidia/deepseek-v4.1-flash", "nvidia/nemotron-3-ultra-550b-a55b"]
+GEMINI_MODELS = _MODELOS_CFG.get("gemini") or ["gemini-3.5-flash-lite"]
+NIM_MODELS = _MODELOS_CFG.get("nvidia_nim") or ["nvidia/nemotron-3.5-lightning-30b-a3b", "nvidia/nemotron-3-ultra-550b-a55b"]
 
 
 def _tg_alert(texto):
