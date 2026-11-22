@@ -207,28 +207,37 @@ Reply ONLY with valid JSON:
     {{"texto": "Spoken line"}}
   ]
 }}"""
-    data = call_ai(prompt)
-    # Normalizacion: algunos modelos (NIM) devuelven la lista de escenas
-    # suelta en vez del objeto completo; se envuelve para no romper nada.
-    if isinstance(data, list):
-        data = {"escenas": data}
-    if isinstance(data, dict):
-        _esc_ok = []
-        for _e in data.get("escenas", []):
-            if isinstance(_e, str):
-                _e = {"texto": _e}
-            if isinstance(_e, dict):
-                _e.setdefault("texto", "")
-                _esc_ok.append(_e)
-        data["escenas"] = _esc_ok
-    escenas = data.get("escenas") or []
-    if len(escenas) < 4:
-        raise RuntimeError(f"Guion invalido: solo {len(escenas)} escenas")
-    palabras = sum(len(e.get("texto", "").split()) for e in escenas)
-    print(f"Guion: {len(escenas)} escenas, {palabras} palabras")
-    if not (wmin - 30 <= palabras <= wmax + 30):
-        print(f"AVISO: el guion tiene {palabras} palabras (objetivo "
-              f"{wmin}-{wmax}); la duracion puede salir del rango 65-90 s")
+    data = None
+    for _intento_guion in range(3):
+        _cand = call_ai(prompt)
+        # Normalizacion: algunos modelos (NIM) devuelven la lista de escenas
+        # suelta en vez del objeto completo; se envuelve para no romper nada.
+        if isinstance(_cand, list):
+            _cand = {"escenas": _cand}
+        if isinstance(_cand, dict):
+            _esc_ok = []
+            for _e in _cand.get("escenas", []):
+                if isinstance(_e, str):
+                    _e = {"texto": _e}
+                if isinstance(_e, dict):
+                    _e.setdefault("texto", "")
+                    _esc_ok.append(_e)
+            _cand["escenas"] = _esc_ok
+        _esc = _cand.get("escenas") or [] if isinstance(_cand, dict) else []
+        _pal = sum(len(e.get("texto", "").split()) for e in _esc)
+        print(f"Guion: {len(_esc)} escenas, {_pal} palabras")
+        # Puerta de contenido: un fragmento rescatado (p. ej. la lista de
+        # hashtags) no es un guion; sin el minimo de escenas y palabras se
+        # vuelve a pedir en vez de producir un video de segundos.
+        if len(_esc) >= 4 and _pal >= 60:
+            if not (wmin - 30 <= _pal <= wmax + 30):
+                print(f"AVISO: el guion tiene {_pal} palabras (objetivo "
+                      f"{wmin}-{wmax}); la duracion puede salir del rango 65-90 s")
+            data = _cand
+            break
+        print(f"Guion invalido (intento {_intento_guion + 1}/3): se pide otro a la IA")
+    if data is None:
+        raise RuntimeError("La IA no devolvio un guion valido tras 3 intentos")
     return data
 
 
