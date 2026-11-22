@@ -3,13 +3,10 @@
   "analitica": true,
   "modelos": {
     "gemini": [
-      "gemini-3.5-flash-lite",
-      "gemini-2.5-flash"
+      "gemini-3.5-flash-lite"
     ],
     "nvidia_nim": [
       "nvidia/nemotron-3.5-lightning-30b-a3b",
-      "meta/llama-3.3-70b-instruct",
-      "nvidia/llama-3.3-nemotron-super-49b-v1.5",
       "nvidia/nemotron-3-ultra-550b-a55b"
     ]
   },
