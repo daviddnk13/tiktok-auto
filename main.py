@@ -160,7 +160,7 @@ def call_ai(prompt_text, nim_offset=0):
                   req = urllib.request.Request(
                       "https://api.groq.com/openai/v1/chat/completions",
                       data=json.dumps(groq_payload).encode(),
-                      headers={"Content-Type": "application/json", "Authorization": f"Bearer {GROQ_KEY}"},
+                      headers={"Content-Type": "application/json", "Authorization": f"Bearer {GROQ_KEY}", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"},
                   )
                   with urllib.request.urlopen(req, timeout=90) as r:
                       rj = json.loads(r.read().decode())
