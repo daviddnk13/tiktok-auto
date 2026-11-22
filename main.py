@@ -171,7 +171,13 @@ def call_ai(prompt_text, nim_offset=0):
                   print("Used Groq fallback:", groq_model)
                   return parse_json_text(raw)
               except Exception as ge:
-                  print(f"Groq {groq_model} failed:", ge)
+                  _det = ""
+                  try:
+                      if hasattr(ge, "read"):
+                          _det = " | " + ge.read().decode("utf-8", "ignore")[:200]
+                  except Exception:
+                      pass
+                  print(f"Groq {groq_model} failed:", ge, _det)
 
     if NVIDIA_KEY:
         _orden_nim = list(NIM_MODELS)
@@ -201,7 +207,13 @@ def call_ai(prompt_text, nim_offset=0):
                   print("Used NVIDIA NIM fallback:", nim_model)
                   return parse_json_text(raw)
               except Exception as ne:
-                  print(f"NVIDIA NIM {nim_model} failed:", ne)
+                  _detn = ""
+                  try:
+                      if hasattr(ne, "read"):
+                          _detn = " | " + ne.read().decode("utf-8", "ignore")[:200]
+                  except Exception:
+                      pass
+                  print(f"NVIDIA NIM {nim_model} failed:", ne, _detn)
 
     raise RuntimeError("Gemini, Groq and NVIDIA NIM all failed")
 
