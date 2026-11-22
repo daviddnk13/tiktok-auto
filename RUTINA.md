@@ -48,8 +48,10 @@ vive la sesión de @firstpaycheckmath.
    `visuals.render_cover(tema["visual"], tema["gancho"], "cover.jpg")`.
    Verificar visualmente que la cifra clave y el gancho se leen bien.
 5. **Subir en TikTok Studio** (mismo perfil del navegador): caption exacto;
-   Editar portada → Cargar portada con la generada; **etiqueta «Contenido
-   generado por IA» ACTIVADA**; comentarios permitidos; visibilidad pública.
+   Editar portada → Cargar portada con la generada; **SIN activar la etiqueta
+   «Contenido generado por IA»** (decisión de David del 2026-11-21: a partir
+   de ahora no se etiqueta el contenido como generado por IA); comentarios
+   permitidos; visibilidad pública.
    **Programar al siguiente hueco (15:30 o 23:30 UTC) estrictamente posterior
    a ahora + 20 min** (el selector de Studio muestra hora local GMT-4: 15:30
    UTC = 11:30, 23:30 UTC = 19:30). Si la programación no está disponible,
