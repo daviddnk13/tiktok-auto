@@ -59,7 +59,7 @@ cfg = cargar_json(os.path.join(BASE, "config.json"), {})
 _MODELOS_CFG = cfg.get("modelos") or {}
 GEMINI_MODELS = _MODELOS_CFG.get("gemini") or ["gemini-3.5-flash-lite"]
 NIM_MODELS = _MODELOS_CFG.get("nvidia_nim") or ["nvidia/nemotron-3.5-lightning-30b-a3b", "nvidia/nemotron-3-ultra-550b-a55b"]
-GROQ_MODELS = _MODELOS_CFG.get("groq") or ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"]
+GROQ_MODELS = _MODELOS_CFG.get("groq") or ["openai/gpt-oss-120b", "qwen/qwen3.8-27b", "openai/gpt-oss-20b"]
 
 
 def _tg_alert(texto):
@@ -155,7 +155,7 @@ def call_ai(prompt_text, nim_offset=0):
                       "model": groq_model,
                       "messages": [{"role": "user", "content": prompt_text}],
                       "temperature": 0.7,
-                      "max_tokens": 4000
+                      "max_tokens": 6000
                   }
                   req = urllib.request.Request(
                       "https://api.groq.com/openai/v1/chat/completions",
