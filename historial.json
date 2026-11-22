@@ -37,9 +37,11 @@
   {
     "fecha": "2026-11-21T21:06:16.399033+00:00",
     "tema": "401(k) match = free money",
-    "estado": "error_subida",
-    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your job is offering you a one hundred percent raise on five percent of your pay. Don't leave free cash on the table! Drop your salary below and let us know wh",
-    "metricas_48h": null
+    "estado": "publicado",
+    "metricas_48h": null,
+    "error_actions": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your job is offering you a one hundred percent raise on five percent of your pay. Don't leave free cash on the table! Drop your salary below and let us know wh",
+    "url": "https://www.tiktok.com/@firstpaycheckmath/video/7710868266826091789",
+    "via": "Romo desde el navegador (artefacto de Actions; subida manual a petición de David, publicación inmediata)"
   },
   {
     "fecha": "2026-11-21T23:59:01.347768+00:00",
