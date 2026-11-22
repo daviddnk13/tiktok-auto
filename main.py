@@ -76,10 +76,44 @@ def _tg_alert(texto):
 
 
 def parse_json_text(raw):
-    m = re.search(r"(\{[\s\S]*\}|\[[\s\S]*\])", raw)
-    if not m:
-        raise ValueError("No JSON in response")
-    return json.loads(m.group(0))
+    # Parser tolerante: los modelos (sobre todo los NIM) a veces devuelven
+    # el JSON con texto extra, comas colgantes o saltos de linea literales
+    # dentro de los strings. Se intenta en orden: parse directo, primer
+    # valor JSON completo (raw_decode) y reparacion de comas colgantes.
+    if raw is None:
+        raise ValueError("respuesta vacia")
+    t = str(raw).strip()
+    t = re.sub(r"^```[a-zA-Z]*\s*", "", t)
+    t = re.sub(r"\s*```\s*$", "", t).strip()
+    dec = json.JSONDecoder(strict=False)
+
+    def _intenta(s):
+        try:
+            return json.loads(s, strict=False)
+        except Exception:
+            pass
+        primero = min([p for p in (s.find("{"), s.find("[")) if p >= 0], default=-1)
+        for m in re.finditer(r"[\{\[]", s):
+            try:
+                val, fin = dec.raw_decode(s[m.start():])
+            except Exception:
+                continue
+            # Solo vale si es el valor principal: empieza donde empieza el
+            # primer corchete del texto o abarca casi todo lo que queda.
+            resto = len(s) - m.start()
+            if isinstance(val, (dict, list)) and (m.start() == primero or fin >= 0.6 * resto):
+                return val
+        return None
+
+    val = _intenta(t)
+    if val is not None:
+        return val
+    t2 = re.sub(r",(\s*[\}\]])", r"\1", t)
+    if t2 != t:
+        val = _intenta(t2)
+        if val is not None:
+            return val
+    raise ValueError("No JSON in response")
 
 
 def call_ai(prompt_text):
@@ -113,28 +147,29 @@ def call_ai(prompt_text):
 
     if NVIDIA_KEY:
         for nim_model in NIM_MODELS:
-            try:
-                nim_payload = {
-                    "model": nim_model,
-                    "messages": [{"role": "user", "content": prompt_text}],
-                    "temperature": 0.7,
-                    "max_tokens": 2500
-                }
-                req = urllib.request.Request(
-                    "https://integrate.api.nvidia.com/v1/chat/completions",
-                    data=json.dumps(nim_payload).encode(),
-                    headers={"Content-Type": "application/json", "Authorization": f"Bearer {NVIDIA_KEY}"},
-                )
-                with urllib.request.urlopen(req, timeout=90) as r:
-                    rj = json.loads(r.read().decode())
-                _msg = rj["choices"][0]["message"]
-                raw = _msg.get("content") or _msg.get("reasoning_content") or ""
-                if not raw.strip():
-                    raise ValueError("respuesta vacia del modelo NIM")
-                print("Used NVIDIA NIM fallback:", nim_model)
-                return parse_json_text(raw)
-            except Exception as ne:
-                print(f"NVIDIA NIM {nim_model} failed:", ne)
+          for _intento_nim in range(2):
+              try:
+                  nim_payload = {
+                      "model": nim_model,
+                      "messages": [{"role": "user", "content": prompt_text}],
+                      "temperature": 0.7,
+                      "max_tokens": 2500
+                  }
+                  req = urllib.request.Request(
+                      "https://integrate.api.nvidia.com/v1/chat/completions",
+                      data=json.dumps(nim_payload).encode(),
+                      headers={"Content-Type": "application/json", "Authorization": f"Bearer {NVIDIA_KEY}"},
+                  )
+                  with urllib.request.urlopen(req, timeout=90) as r:
+                      rj = json.loads(r.read().decode())
+                  _msg = rj["choices"][0]["message"]
+                  raw = _msg.get("content") or _msg.get("reasoning_content") or ""
+                  if not raw.strip():
+                      raise ValueError("respuesta vacia del modelo NIM")
+                  print("Used NVIDIA NIM fallback:", nim_model)
+                  return parse_json_text(raw)
+              except Exception as ne:
+                  print(f"NVIDIA NIM {nim_model} failed:", ne)
 
     raise RuntimeError("Both Gemini and NVIDIA NIM failed")
 
