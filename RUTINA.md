@@ -13,10 +13,16 @@ vive la sesión de @firstpaycheckmath.
 
 ## Ciclo completo (en orden)
 
-0. **Disparar la generación (si falta).** Leer `historial.json` del repo
-   `daviddnk13/tiktok-auto`. Si ya existe una entrada de la franja actual
-   (commit del bot o entrada nueva en las últimas ~2 h), el disparo ya ocurrió
-   (quizá GitHub despertó solo): saltar al paso 1. Si no: en el perfil
+0. **Disparar la generación (si falta).** Leer `historial.json` y la `cola`
+   de `estrategia.json` del repo `daviddnk13/tiktok-auto`. **Guarda
+   anti-duplicado (2026-11-21): si ya existe una entrada con
+   `estado: "error_subida"` cuyo tema siga `pendiente` en la cola, NO
+   disparar una generación nueva — ese video ya está generado y esperando
+   subida; ir directo al paso 1.** (Sin esta guarda, el 2026-11-21 el tema 4
+   se generó dos veces, corridas n.º 4 y n.º 5, porque seguía pendiente.)
+   Si no hay ningún `error_subida` pendiente y ya existe una entrada de la
+   franja actual (commit del bot o entrada nueva en las últimas ~2 h), el
+   disparo ya ocurrió (quizá GitHub despertó solo): saltar al paso 1. Si no: en el perfil
    «TikTok» del navegador, abrir Actions → «Auto First Paycheck Math» →
    **Run workflow** → confirmar. Después esperar a que aterrice la corrida:
    releer `historial.json` cada ~5 min hasta que aparezca la entrada nueva
@@ -63,6 +69,8 @@ vive la sesión de @firstpaycheckmath.
 ## Reglas que no se rompen
 
 - Nunca subir un tema que ya figure `publicado` en estrategia.
+- Nunca disparar una generación nueva mientras haya un `error_subida`
+  pendiente de subir: primero se sube lo que ya está generado.
 - Una sola subida por ciclo, siempre la más antigua pendiente.
 - El video 1 (Roth IRA, publicado a mano el 2026-11-21) y el tema 1 de la cola
   (`en_produccion`) son el mismo: no volver a subirlo.
