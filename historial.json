@@ -56,5 +56,12 @@
     "estado": "error_subida",
     "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your job is offering you a one hundred percent raise on five percent of your pay. Don't leave free cash on the table! What is your company's match? #personalfi",
     "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-22T20:32:00.785829+00:00",
+    "tema": "The $1,000 starter emergency fund",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Before investing, do THIS first. Build your starter safety net before the market takes a swing at you. How much do you have saved right now? #personalfinance #",
+    "metricas_48h": null
   }
 ]
