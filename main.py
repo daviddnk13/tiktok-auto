@@ -173,6 +173,19 @@ Reply ONLY with valid JSON:
   ]
 }}"""
     data = call_ai(prompt)
+    # Normalizacion: algunos modelos (NIM) devuelven la lista de escenas
+    # suelta en vez del objeto completo; se envuelve para no romper nada.
+    if isinstance(data, list):
+        data = {"escenas": data}
+    if isinstance(data, dict):
+        _esc_ok = []
+        for _e in data.get("escenas", []):
+            if isinstance(_e, str):
+                _e = {"texto": _e}
+            if isinstance(_e, dict):
+                _e.setdefault("texto", "")
+                _esc_ok.append(_e)
+        data["escenas"] = _esc_ok
     escenas = data.get("escenas") or []
     if len(escenas) < 4:
         raise RuntimeError(f"Guion invalido: solo {len(escenas)} escenas")
