@@ -8,6 +8,10 @@
     "nvidia_nim": [
       "nvidia/nemotron-3.5-lightning-30b-a3b",
       "nvidia/nemotron-3-ultra-550b-a55b"
+    ],
+    "groq": [
+      "llama-3.3-70b-versatile",
+      "llama-3.1-8b-instant"
     ]
   },
   "nicho": "Personal finance explained in plain American English for young US workers with their first salary: paycheck math, budgeting rules, Roth IRA and 401(k) basics, credit cards, and high-yield savings. Explainers only: how things work, never personalized financial advice.",
