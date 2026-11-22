@@ -116,7 +116,7 @@ def parse_json_text(raw):
     raise ValueError("No JSON in response")
 
 
-def call_ai(prompt_text):
+def call_ai(prompt_text, nim_offset=0):
     for model_name in GEMINI_MODELS:
         payload = {"contents": [{"parts": [{"text": prompt_text}]}]}
         for intento in range(2):
@@ -146,7 +146,11 @@ def call_ai(prompt_text):
                 time.sleep(2)
 
     if NVIDIA_KEY:
-        for nim_model in NIM_MODELS:
+        _orden_nim = list(NIM_MODELS)
+        if _orden_nim:
+            _off = nim_offset % len(_orden_nim)
+            _orden_nim = _orden_nim[_off:] + _orden_nim[:_off]
+        for nim_model in _orden_nim:
           for _intento_nim in range(2):
               try:
                   nim_payload = {
@@ -209,7 +213,7 @@ Reply ONLY with valid JSON:
 }}"""
     data = None
     for _intento_guion in range(3):
-        _cand = call_ai(prompt)
+        _cand = call_ai(prompt, nim_offset=_intento_guion)
         # Normalizacion: algunos modelos (NIM) devuelven la lista de escenas
         # suelta en vez del objeto completo; se envuelve para no romper nada.
         if isinstance(_cand, list):
