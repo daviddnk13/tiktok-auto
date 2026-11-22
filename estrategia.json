@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-21T19:10:30+00:00",
+  "actualizado": "2026-11-22T05:55:47.454385+00:00",
   "cola": [
     {
       "cta": "Follow for part 2: how to open one, step by step.",
@@ -88,14 +88,13 @@
         "tipo": "comparison_bars",
         "titulo_visual": "Two ways to pay the same card"
       },
-      "url": null,
-      "url_pendiente": "TikTok asigna la URL al publicarse; completar tras el 2026-11-22T15:30:00Z",
+      "url": "https://www.tiktok.com/@firstpaycheckmath/video/7710703565072862477",
       "programado_para": "2026-11-22T15:30:00+00:00",
       "publicado_via": "Romo desde el navegador (artefacto de Actions)"
     },
     {
       "cta": "Follow — and drop your salary in the comments, we run the match math on real numbers.",
-      "estado": "pendiente",
+      "estado": "publicado",
       "gancho": "Your job is offering you a 100% raise on 5% of your pay",
       "id": 4,
       "titulo": "401(k) match = free money",
@@ -110,7 +109,9 @@
         "subtitulo": "5% of a $45,000 salary, 30 years at 8%",
         "tipo": "comparison_bars",
         "titulo_visual": "With the match vs without it"
-      }
+      },
+      "url": "https://www.tiktok.com/@firstpaycheckmath/video/7710868266826091789",
+      "publicado_via": "Romo desde el navegador a petición de David (publicación inmediata)"
     },
     {
       "cta": "Follow — next in the starter series: the account that pays you 4% instead of nothing.",
