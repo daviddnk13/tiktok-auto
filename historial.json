@@ -1,82 +1,89 @@
 [
- {
-  "fecha": "2026-11-21T06:46:59.698392+00:00",
-  "tema": "The 50/30/20 rule on a real paycheck",
-  "estado": "error_subida",
-  "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your first real salary can feel confusing, but a simple budget makes it easy. Comment your take-home pay and I'll split it with this rule in a reply. #personal",
-  "metricas_48h": null
- },
- {
-  "fecha": "2026-11-21T06:52:22.955849+00:00",
-  "tema": "The 50/30/20 rule on a real paycheck",
-  "estado": "publicado",
-  "metricas_48h": null,
-  "url": "https://www.tiktok.com/@firstpaycheckmath/video/7710517393201696014",
-  "programado_para": "2026-11-21T23:30:00+00:00",
-  "error_actions": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Your $2,800 paycheck, split in 60 seconds. Stop guessing where your money goes after your first job. The 50/30/20 rule keeps it simple. Comment your take-home ",
-  "via": "Subido por Romo desde TikTok Studio con el artefacto video-fallido de Actions; la subida directa desde Actions fue rechazada por IP de datacenter."
- },
- {
-  "fecha": "2026-11-21T18:48:26.018637+00:00",
-  "tema": "Your first credit card trap",
-  "estado": "error_subida",
-  "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'The minimum payment is designed to keep you poor. Swipe that first credit card with a plan, not a prayer! How much do you usually pay on your balance? #persona",
-  "metricas_48h": null
- },
- {
-  "fecha": "2026-11-21T19:10:30+00:00",
-  "tema": "Your first credit card trap",
-  "estado": "publicado",
-  "metricas_48h": null,
-  "url": null,
-  "url_pendiente": "TikTok asigna la URL al publicarse; completar tras el 2026-11-22T15:30:00Z",
-  "programado_para": "2026-11-22T15:30:00+00:00",
-  "error_actions": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'The minimum payment is designed to keep you poor. Swipe that first credit card with a plan, not a prayer! How much do you usually pay on your balance? #persona",
-  "via": "Subido por Romo desde TikTok Studio con el artefacto video-fallido de Actions; la subida directa desde Actions fue rechazada por IP de datacenter. Programado al siguiente hueco libre (22 nov 15:30 UTC) porque el hueco 23:30 UTC del 21 nov ya lo ocupaba el tema 2."
- },
- {
-  "fecha": "2026-11-21T21:06:16.399033+00:00",
-  "tema": "401(k) match = free money",
-  "estado": "publicado",
-  "metricas_48h": null,
-  "error_actions": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your job is offering you a one hundred percent raise on five percent of your pay. Don't leave free cash on the table! Drop your salary below and let us know wh",
-  "url": "https://www.tiktok.com/@firstpaycheckmath/video/7710868266826091789",
-  "via": "Romo desde el navegador (artefacto de Actions; subida manual a petición de David, publicación inmediata)"
- },
- {
-  "fecha": "2026-11-21T23:59:01.347768+00:00",
-  "tema": "401(k) match = free money",
-  "estado": "error_subida",
-  "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Your job is offering you a one hundred percent raise on five percent of your pay. Free money left on the table is wild. Follow and drop your salary in the comm",
-  "metricas_48h": null
- },
- {
-  "fecha": "2026-11-22T03:22:11.174513+00:00",
-  "tema": "401(k) match = free money",
-  "estado": "error_subida",
-  "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your job is offering you a one hundred percent raise on five percent of your pay. Don't leave free cash on the table! What is your company's match? #personalfi",
-  "metricas_48h": null
- },
- {
-  "fecha": "2026-11-22T20:32:00.785829+00:00",
-  "tema": "The $1,000 starter emergency fund",
-  "estado": "error_subida",
-  "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Before investing, do THIS first. Build your starter safety net before the market takes a swing at you. How much do you have saved right now? #personalfinance #",
-  "metricas_48h": null
- },
- {
-  "fecha": "2026-11-23T03:55:14.575839+00:00",
-  "tema": "The $1,000 starter emergency fund",
-  "estado": "error_subida",
-  "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Before investing, do THIS first. Build your starter safety net before touching the stock market. How much do you have saved right now? #personalfinance #moneyt",
-  "metricas_48h": null
- },
- {
-  "fecha": "2026-11-23T19:31:15.777987+00:00",
-  "tema": "The $1,000 starter emergency fund",
-  "estado": "publicado",
-  "metricas_48h": null,
-  "url": "",
-  "nota": "Subido manualmente por David desde su PC el 2026-11-23; URL pendiente de registrar."
- }
+  {
+    "fecha": "2026-11-21T06:46:59.698392+00:00",
+    "tema": "The 50/30/20 rule on a real paycheck",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your first real salary can feel confusing, but a simple budget makes it easy. Comment your take-home pay and I'll split it with this rule in a reply. #personal",
+    "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-21T06:52:22.955849+00:00",
+    "tema": "The 50/30/20 rule on a real paycheck",
+    "estado": "publicado",
+    "metricas_48h": null,
+    "url": "https://www.tiktok.com/@firstpaycheckmath/video/7710517393201696014",
+    "programado_para": "2026-11-21T23:30:00+00:00",
+    "error_actions": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Your $2,800 paycheck, split in 60 seconds. Stop guessing where your money goes after your first job. The 50/30/20 rule keeps it simple. Comment your take-home ",
+    "via": "Subido por Romo desde TikTok Studio con el artefacto video-fallido de Actions; la subida directa desde Actions fue rechazada por IP de datacenter."
+  },
+  {
+    "fecha": "2026-11-21T18:48:26.018637+00:00",
+    "tema": "Your first credit card trap",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'The minimum payment is designed to keep you poor. Swipe that first credit card with a plan, not a prayer! How much do you usually pay on your balance? #persona",
+    "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-21T19:10:30+00:00",
+    "tema": "Your first credit card trap",
+    "estado": "publicado",
+    "metricas_48h": null,
+    "url": null,
+    "url_pendiente": "TikTok asigna la URL al publicarse; completar tras el 2026-11-22T15:30:00Z",
+    "programado_para": "2026-11-22T15:30:00+00:00",
+    "error_actions": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'The minimum payment is designed to keep you poor. Swipe that first credit card with a plan, not a prayer! How much do you usually pay on your balance? #persona",
+    "via": "Subido por Romo desde TikTok Studio con el artefacto video-fallido de Actions; la subida directa desde Actions fue rechazada por IP de datacenter. Programado al siguiente hueco libre (22 nov 15:30 UTC) porque el hueco 23:30 UTC del 21 nov ya lo ocupaba el tema 2."
+  },
+  {
+    "fecha": "2026-11-21T21:06:16.399033+00:00",
+    "tema": "401(k) match = free money",
+    "estado": "publicado",
+    "metricas_48h": null,
+    "error_actions": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your job is offering you a one hundred percent raise on five percent of your pay. Don't leave free cash on the table! Drop your salary below and let us know wh",
+    "url": "https://www.tiktok.com/@firstpaycheckmath/video/7710868266826091789",
+    "via": "Romo desde el navegador (artefacto de Actions; subida manual a petición de David, publicación inmediata)"
+  },
+  {
+    "fecha": "2026-11-21T23:59:01.347768+00:00",
+    "tema": "401(k) match = free money",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Your job is offering you a one hundred percent raise on five percent of your pay. Free money left on the table is wild. Follow and drop your salary in the comm",
+    "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-22T03:22:11.174513+00:00",
+    "tema": "401(k) match = free money",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your job is offering you a one hundred percent raise on five percent of your pay. Don't leave free cash on the table! What is your company's match? #personalfi",
+    "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-22T20:32:00.785829+00:00",
+    "tema": "The $1,000 starter emergency fund",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Before investing, do THIS first. Build your starter safety net before the market takes a swing at you. How much do you have saved right now? #personalfinance #",
+    "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-23T03:55:14.575839+00:00",
+    "tema": "The $1,000 starter emergency fund",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Before investing, do THIS first. Build your starter safety net before touching the stock market. How much do you have saved right now? #personalfinance #moneyt",
+    "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-23T19:31:15.777987+00:00",
+    "tema": "The $1,000 starter emergency fund",
+    "estado": "publicado",
+    "metricas_48h": null,
+    "url": "",
+    "nota": "Subido manualmente por David desde su PC el 2026-11-23; URL pendiente de registrar."
+  },
+  {
+    "fecha": "2026-11-23T23:56:38.411426+00:00",
+    "tema": "HYSA vs the bank paying you nothing",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Your savings account pays 0.01%. This one pays about 4%. Stop letting big banks keep your cash! Drop your thoughts below. #personalfinance #moneytok #firstpayc",
+    "metricas_48h": null
+  }
 ]
