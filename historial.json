@@ -63,5 +63,12 @@
     "estado": "error_subida",
     "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Before investing, do THIS first. Build your starter safety net before the market takes a swing at you. How much do you have saved right now? #personalfinance #",
     "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-23T03:55:14.575839+00:00",
+    "tema": "The $1,000 starter emergency fund",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Before investing, do THIS first. Build your starter safety net before touching the stock market. How much do you have saved right now? #personalfinance #moneyt",
+    "metricas_48h": null
   }
 ]
