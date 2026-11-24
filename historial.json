@@ -85,5 +85,12 @@
     "estado": "error_subida",
     "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Your savings account pays 0.01%. This one pays about 4%. Stop letting big banks keep your cash! Drop your thoughts below. #personalfinance #moneytok #firstpayc",
     "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-24T07:04:01.120083+00:00",
+    "tema": "HYSA vs the bank paying you nothing",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your savings account pays zero point zero one percent. This one pays about four percent. Are you losing money just sitting in a big-bank checking account? Let'",
+    "metricas_48h": null
   }
 ]
