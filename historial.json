@@ -99,5 +99,12 @@
     "estado": "error_subida",
     "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'HYSA vs the bank paying you nothing\\n\\nWhere are you currently keeping your emergency savings?\\n\\nEducational content only — not financial advice. Examples use",
     "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-25T05:36:47.015182+00:00",
+    "tema": "HYSA vs the bank paying you nothing",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Your savings account pays 0.01%. This one pays about 4%. Stop letting big banks keep your cash! Drop your thoughts below. #personalfinance #moneytok #firstpayc",
+    "metricas_48h": null
   }
 ]
