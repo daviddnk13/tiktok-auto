@@ -92,5 +92,12 @@
     "estado": "error_subida",
     "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': \"Your savings account pays zero point zero one percent. This one pays about four percent. Are you losing money just sitting in a big-bank checking account? Let'",
     "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-25T00:04:21.490378+00:00",
+    "tema": "HYSA vs the bank paying you nothing",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'HYSA vs the bank paying you nothing\\n\\nWhere are you currently keeping your emergency savings?\\n\\nEducational content only — not financial advice. Examples use",
+    "metricas_48h": null
   }
 ]
