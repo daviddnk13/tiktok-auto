@@ -106,5 +106,12 @@
     "estado": "error_subida",
     "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Your savings account pays 0.01%. This one pays about 4%. Stop letting big banks keep your cash! Drop your thoughts below. #personalfinance #moneytok #firstpayc",
     "metricas_48h": null
+  },
+  {
+    "fecha": "2026-11-25T23:49:00.850043+00:00",
+    "tema": "HYSA vs the bank paying you nothing",
+    "estado": "error_subida",
+    "error": "tiktok-uploader reporto el video como no subido: [{'path': '/home/runner/work/tiktok-auto/tiktok-auto/work/final_video.mp4', 'description': 'Your savings account pays 0.01%. This one pays about 4%. Stop leaving free money sitting on the table! Drop your thoughts below.\\n\\n#personalfinance #moneytok ",
+    "metricas_48h": null
   }
 ]
