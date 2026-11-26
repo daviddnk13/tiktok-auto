@@ -4,8 +4,8 @@ on:
   schedule:
     # 15:30 UTC ≈ mañana en EE. UU. (ET/CT) y 23:30 UTC ≈ tarde-noche:
     # las dos franjas de publicación del canal (2 videos/día).
-    - cron: "30 15 * * *"
-    - cron: "30 23 * * *"
+    # - cron: "30 15 * * *"
+    # - cron: "30 23 * * *"
 permissions:
   contents: write
 concurrency:
